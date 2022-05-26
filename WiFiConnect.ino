@@ -3,7 +3,7 @@ const char* ssid = "Galaxy S20 FEF378";
 const char* password = "111222333";
 
 unsigned long previousMillis = 0;
-unsigned long interval = 10000;
+unsigned long interval = 30000;
 
 void initWiFi() {
   WiFi.mode(WIFI_STA);
