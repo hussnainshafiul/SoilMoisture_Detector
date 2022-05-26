@@ -24,5 +24,5 @@ WiFiClient client;
 #define MQTT_NAME "hussshafiul" // Adafruit IO Username
 #define MQTT_PASS "aio_DwVh62wuoHlT2v36r04gpu1LYEDQ" // Adafruit IO AIO key
 
-const int Sensor_key = 36;             
+const int Sensor_pin = 36;             
 int Sensor_value;   
