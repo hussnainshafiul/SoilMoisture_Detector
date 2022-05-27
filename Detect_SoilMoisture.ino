@@ -3,7 +3,7 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>            
 #include "Adafruit_MQTT.h"
-#include "Adafruit_MQTT_Client.h"
+//#include "Adafruit_MQTT_Client.h"
 
 /*Wifi Credentials*/
 const char *ssid =  "Vivo1920";     // WiFi Name
