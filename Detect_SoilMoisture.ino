@@ -42,3 +42,77 @@ void setup()
   }
   Serial.println("");
   Serial.println("WiFi connected");
+
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+}
+ void loop()
+{
+    MQTT_connect();
+  Sensor_value = ( 100 - ( (analogRead(Sensor_pin) / 1023.00) * 100 ) );
+
+  Serial.print("Soil Moisture is  = ");
+  Serial.print(Sensor_value);
+  Serial.println("%");
+
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(WHITE);
+  display.setCursor(0, 10);
+  display.println("Soil");
+  display.setCursor(0, 30);
+  display.println("Moisture");
+  display.setCursor(0, 50);
+  display.println(Sensor_value);
+  display.setCursor(40, 50);
+  display.println("%");
+  display.display(); 
+ 
+       if (! Sensor_data.publish(Sensor_value)) 
+       {                     
+         delay(5000);   
+          }
+ delay(6000);
+}
+
+//Function to connect to Aidafruit
+
+void MQTT_connect() {
+
+  int8_t again;
+
+  if (mqtt.connected()) {
+
+    return;
+
+  }
+
+  //Prompt for connection
+ Serial.print("Connecting to Adafruit IO");
+
+uint8_t retry = 5;
+
+  //Reconnection To Aidafruit
+  while ((again = mqtt.connect()) != 0) { 
+
+       Serial.println(mqtt.connectErrorString(again));
+
+       Serial.println("Retrying Adafruit connection in 5 seconds...");
+
+       mqtt.disconnect();
+
+       delay(5000);  
+
+       retry--;
+
+       if (retry == 0) {
+
+         while (1);
+
+       }
+
+  }
+  Serial.println("");
+
+  Serial.println("Adafruit IO is Connected!");
+
+}
